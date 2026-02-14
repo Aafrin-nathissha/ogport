@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@500&display=swap');
+/* Using a clean, modern font as fallback/replacement */
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #000;
+    /* Fallback for background */
+    font-family: 'Outfit', sans-serif;
+    /* Closest match to "Youth" style if not available, user can replace */
+}
+
+.interactive-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    perspective: 1000px;
+    /* Essential for 3D effect */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('assets/background-depth.jpg');
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+    transform: scale(1.1);
+    /* Zoom in slightly for parallax movement */
+}
+
+.content-wrapper {
+    position: absolute;
+    top: 42%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 1;
+    /* Will be animated by JS */
+    opacity: 1;
+    transform-style: preserve-3d;
+}
+
+.portfolio-text {
+    margin: 0;
+    padding: 0;
+    color: #FFFFFF;
+    font-family: 'Youth Medium', sans-serif;
+    /* User specified font */
+    font-weight: normal;
+    /* Regular */
+    opacity: 1;
+    /* Opacity 100% */
+    font-size: 14.6rem;
+    /* User requested font size */
+    line-height: 0.85;
+    /* Tighter spacing for design */
+    mix-blend-mode: soft-light;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    white-space: nowrap;
+}
+
+/* "Youth Medium" is likely a custom font. Ensure it's installed or use a web font. 
+   If user has the font file, they should add @font-face here. */
+
+.line-1,
+.line-2 {
+    display: block;
+    position: relative;
+    /* For absolute positioning of hover text */
+    cursor: default;
+    /* Or pointer if interactive */
+}
+
+.text-original {
+    transition: opacity 0.4s ease;
+    opacity: 1;
+}
+
+.text-hover {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* Centered relative to line container */
+    color: #083c55;
+    opacity: 1;
+    /* Opacity 1 so mask controls visibility */
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    /* Let clicks pass through if needed */
+
+    /* Allow text to be wider than parent and contain descenders */
+    width: auto;
+    white-space: nowrap;
+    padding: 0.2em 0.5em;
+    /* Add framing to avoid clipping descenders like 'g' */
+
+    z-index: 2;
+    /* Ensure hover text is on top */
+
+    /* The Spotlight Mask (Soft Flowy Edge) */
+    /* Initally off-screen */
+    -webkit-mask-image: radial-gradient(circle 250px at var(--x, -100%) var(--y, -100%), black 25%, transparent 60%);
+    mask-image: radial-gradient(circle 250px at var(--x, -100%) var(--y, -100%), black 25%, transparent 60%);
+}
+
+/* Hover effects for the entire text block */
+/* Original text always visible (or faded slightly on hover if desired) */
+.portfolio-text:hover .text-original {
+    opacity: 0.5;
+    /* Fade both original texts to 50% */
+}
+
+/* When hovering the container, expand the spotlight */
+/* Correction: modifying .text-hover to be fixed/relative properly
+   Current .text-hover is inside .line-X. 
+   If .portfolio-text (parent) has the vars, we can use them.
+   But if .text-hover is absolute inside .line-1, and .line-1 is inside .portfolio-text...
+   The coordinate system of clip-path is local to the element (.text-hover).
+   If .text-hover is centered in line, its 0,0 is different from .portfolio-text 0,0.
+   
+   To fix: Ensure --x/--y accounts for offset or make .text-hover cover the entire text block?
+   "Ai" and "Engineer" are small text centered.
+   Maybe apply clip-path to a wrapper?
+   
+   Let's rely on the user's "flow shape" request. 
+   If I hover top left, I want top left of "Ai" to show? 
+   "Ai" is only in the center. So top left is empty.
+   
+   Let's try the simple circle first. If coordinates are off, I will adjust.
+   Note: line-1 is top, line-2 is bottom.
+   If I hover line-1, Y is small.
+   If I hover line-2, Y is large.
+   .text-hover in line-1 needs to use Y relative to line-1?
+   JS calculates Y relative to .portfolio-text.
+   line-1 is top of .portfolio-text. So Y is correct for line-1.
+   line-2 is below line-1. So Y relative to .portfolio-text is (line1_height + local_y).
+   But .text-hover in line-2 is local.
+   So for line-2, the clip-path Y needs to be (var(--y) - line1_height).
+   
+   Hardcoding offset for line 2?
+   Since font-size is HUGE (14.6rem), line-height 0.85...
+   Let's use calc.
+   
+   OR, simpler JS: calculate x/y relative to EACH line?
+   Let's update JS to put vars on the lines? No, single event listener is better.
+   
+   Let's update CSS to offset line-2's mask.
+*/
