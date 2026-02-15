@@ -6,10 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aafrin's Portfolio</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body>
-    <div class="interactive-container">
+    <!-- Hero Section -->
+    <section id="hero" class="interactive-container">
         <div class="background-image"></div>
         <div class="content-wrapper">
             <h1 class="portfolio-text">
@@ -22,8 +24,191 @@
                     <span class="text-hover">Engineer</span>
                 </span>
             </h1>
+
+            <div class="hero-buttons">
+                <a href="./Aafrin Nathissha- Resume.pdf" class="btn resume-btn" target="_blank">
+                    <i class="fas fa-file-alt"></i> Resume
+                </a>
+                <div class="social-row">
+                    <a href="hire-me.html" class="btn hire-btn">Hire Me</a>
+                    <a href="https://github.com/Aafrin-nathissha" target="_blank" class="btn social-btn"><i
+                            class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/aafrinnathissha" target="_blank" class="btn social-btn"><i
+                            class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+
+            <a href="#about" class="scroll-indicator">
+                <span>Explore</span>
+                <div class="arrow"></div>
+            </a>
         </div>
-    </div>
+    </section>
+
+    <!-- Navigation -->
+    <nav class="glass-nav">
+        <ul>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- About Section -->
+    <main>
+        <section id="about" class="content-section">
+            <div class="container">
+                <h2 class="section-title">About Me</h2>
+                <div class="about-grid">
+                    <div class="about-text glass-card">
+                        <p class="highlight">Aspiring AI Engineer | Data Scientist</p>
+                        <p>
+                            B.Tech in Artificial Intelligence and Data Science (2022-2026) from AMS College of
+                            Engineering (Anna University Affiliated).
+                        </p>
+                        <p>
+                            Passionate about applying AI to real-world problems and enhancing decision-making.
+                            With a strong foundation in AI, Machine Learning, and Deep Learning, I excel in data-driven
+                            problem-solving.
+                            Committed to continuous learning and staying ahead in emerging technologies.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="content-section">
+            <div class="container">
+                <h2 class="section-title">Technical Expertise</h2>
+                <div class="skills-grid">
+                    <div class="skill-category glass-card">
+                        <h3>AI & Data Science</h3>
+                        <div class="custom-tags">
+                            <span>Python</span>
+                            <span>NLP</span>
+                            <span>Hugging Face Transformers</span>
+                            <span>SQL</span>
+                            <span>Big Data</span>
+                            <span>Deep Learning</span>
+                        </div>
+                    </div>
+                    <div class="skill-category glass-card">
+                        <h3>Development</h3>
+                        <div class="custom-tags">
+                            <span>JavaScript</span>
+                            <span>HTML5/CSS3</span>
+                            <span>React.js</span>
+                            <span>Tailwind CSS</span>
+                            <span>FastAPI</span>
+                            <span>Git/GitHub</span>
+                        </div>
+                    </div>
+                    <div class="skill-category glass-card">
+                        <h3>Tools & Cloud</h3>
+                        <div class="custom-tags">
+                            <span>AWS</span>
+                            <span>Firebase</span>
+                            <span>VS Code</span>
+                            <span>REST APIs</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="content-section">
+            <div class="container">
+                <h2 class="section-title">Featured Projects</h2>
+                <div class="projects-grid">
+                    <!-- Project 1 -->
+                    <div class="project-card glass-card">
+                        <h3>WhatsApp AI Chatbot</h3>
+                        <p class="project-role">Client Project</p>
+                        <p>Engineered and deployed a live WhatsApp chatbot leveraging Hugging Face transformer models
+                            for real-time NLP. Integrated via WhatsApp Business API for seamless customer interactions.
+                        </p>
+                        <div class="tags">
+                            <span>NLP</span>
+                            <span>WhatsApp API</span>
+                            <span>Transformers</span>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="project-card glass-card">
+                        <h3>AI Fluently</h3>
+                        <p class="project-role">Language Learning Platform</p>
+                        <p>Mobile-first React.js app using Google Gemini & Web Speech API. Features AI grammar
+                            correction, vocabulary building, and interactive quizzes.</p>
+                        <div class="tags">
+                            <span>React.js</span>
+                            <span>Gemini API</span>
+                            <span>Web Speech API</span>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="project-card glass-card">
+                        <h3>E-Commerce Solution</h3>
+                        <p class="project-role">Client Project</p>
+                        <p>Delivered a live platform hosting 200+ products with real-time inventory tracking and
+                            mobile-first responsive design.</p>
+                        <div class="tags">
+                            <span>Full-Stack</span>
+                            <span>Real-time DB</span>
+                            <span>Responsive</span>
+                        </div>
+                    </div>
+
+                    <!-- Project 4 -->
+                    <div class="project-card glass-card">
+                        <h3>AI Study Planner</h3>
+                        <p class="project-role">Voice Assistant Chatbot</p>
+                        <p>Full-stack AI chatbot using React, FastAPI, and Groq LLM API. Helps students plan studies via
+                            voice and text interactions.</p>
+                        <div class="tags">
+                            <span>FastAPI</span>
+                            <span>Groq LLM</span>
+                            <span>React</span>
+                        </div>
+                    </div>
+
+                    <!-- Project 5 -->
+                    <div class="project-card glass-card">
+                        <h3>Clubee</h3>
+                        <p class="project-role">Club Management Suite</p>
+                        <p>Secured Finalist position in a 24-hour hackathon. Rapidly designed and deployed a
+                            comprehensive club management website prototype.</p>
+                        <div class="tags">
+                            <span>Hackathon</span>
+                            <span>Rapid Prototyping</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="content-section">
+            <div class="container">
+                <h2 class="section-title">Let's Connect</h2>
+                <div class="contact-card glass-card">
+                    <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of your
+                        visions.</p>
+                    <div class="contact-links">
+                        <a href="mailto:aafrin2601@gmail.com" class="contact-btn">aafrin2601@gmail.com</a>
+                        <a href="https://www.linkedin.com/in/aafrinnathissha" target="_blank"
+                            class="contact-btn">LinkedIn</a>
+                        <a href="tel:+918807882397" class="contact-btn">+91 88078 82397</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
     <script src="script.js"></script>
 </body>
 

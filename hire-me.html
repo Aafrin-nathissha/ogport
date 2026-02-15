@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Aafrin</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .contact-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .contact-card {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 50px;
+            border-radius: 20px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.8s ease-out;
+            text-align: left;
+        }
+
+        .contact-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3rem;
+            color: #fff;
+            margin: 0 0 10px 0;
+            font-weight: 700;
+        }
+
+        .contact-subtitle {
+            font-family: 'Outfit', sans-serif;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1rem;
+            margin-bottom: 40px;
+            line-height: 1.5;
+        }
+
+        .highlight-email {
+            color: #fff;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .highlight-email:hover {
+            text-decoration: underline;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        label {
+            font-family: 'Outfit', sans-serif;
+            color: #fff;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        input,
+        textarea {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            color: #fff;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s, background 0.3s;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .privacy-text {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .submit-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        .social-footer {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+        }
+
+        .social-link {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            color: #fff;
+            transform: translateY(-3px);
+        }
+
+        .home-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .home-link:hover {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+            }
+
+            .contact-card {
+                padding: 30px;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Palette Overrides for Contact Page */
+        .contact-card {
+            background: rgba(50, 94, 149, 0.3);
+            /* Misty Ridge transparent */
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(150, 185, 220, 0.2);
+            /* Sky Blue */
+            padding: 50px;
+            border-radius: 20px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 0 50px rgba(14, 53, 95, 0.5);
+            /* Midnight Blue shadow */
+            animation: fadeIn 0.8s ease-out;
+            text-align: left;
+        }
+
+        .contact-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3rem;
+            color: #E3EEF6;
+            /* Ice Mist */
+            margin: 0 0 10px 0;
+            font-weight: 700;
+        }
+
+        .contact-subtitle {
+            font-family: 'Outfit', sans-serif;
+            color: #C3D9E6;
+            /* Pale Sky */
+            font-size: 1rem;
+            margin-bottom: 40px;
+            line-height: 1.5;
+        }
+
+        .highlight-email {
+            color: #E3EEF6;
+            font-weight: bold;
+            text-decoration: none;
+            border-bottom: 1px dashed #96B9DC;
+            padding-bottom: 2px;
+        }
+
+        .highlight-email:hover {
+            color: #6E9BCF;
+            /* Cool Blue */
+            border-bottom-color: #6E9BCF;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        label {
+            font-family: 'Outfit', sans-serif;
+            color: #C3D9E6;
+            /* Pale Sky */
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        input,
+        textarea {
+            background: rgba(30, 73, 122, 0.4);
+            /* Deep Horizon */
+            border: 1px solid rgba(150, 185, 220, 0.2);
+            /* Sky Blue */
+            padding: 15px;
+            border-radius: 8px;
+            color: #E3EEF6;
+            /* Ice Mist */
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s, background 0.3s;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #6E9BCF;
+            /* Cool Blue */
+            background: rgba(50, 94, 149, 0.4);
+            /* Misty Ridge */
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .privacy-text {
+            color: rgba(195, 217, 230, 0.6);
+            /* Pale Sky low opacity */
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .submit-btn {
+            background: rgba(227, 238, 246, 0.1);
+            /* Ice Mist low opacity */
+            color: #E3EEF6;
+            border: 1px solid rgba(150, 185, 220, 0.3);
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover {
+            background: #E3EEF6;
+            /* Ice Mist */
+            color: #0E355F;
+            /* Midnight Blue */
+            box-shadow: 0 0 15px rgba(110, 155, 207, 0.4);
+        }
+
+        .social-footer {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            border-top: 1px solid rgba(150, 185, 220, 0.1);
+            padding-top: 30px;
+        }
+
+        .social-link {
+            color: #96B9DC;
+            /* Sky Blue */
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            color: #E3EEF6;
+            transform: translateY(-3px);
+            text-shadow: 0 0 10px rgba(110, 155, 207, 0.5);
+        }
+
+        .home-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #C3D9E6;
+            /* Pale Sky */
+            text-decoration: none;
+            font-size: 1.5rem;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .home-link:hover {
+            opacity: 1;
+            color: #E3EEF6;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+            }
+
+            .contact-card {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background-image"></div>
+    <a href="index.html" class="home-link"><i class="fas fa-arrow-left"></i></a>
+
+    <div class="contact-container">
+        <div class="contact-card">
+            <h1 class="contact-title">Contact Form</h1>
+            <p class="contact-subtitle">
+                Please contact me directly at <a href="mailto:aafrin2601@gmail.com"
+                    class="highlight-email">aafrin2601@gmail.com</a> or drop your info here.
+            </p>
+
+            <form id="contactForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Full name</label>
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label for="message">Your Message</label>
+                    <textarea id="message" name="message" placeholder="Tell me about your project," required></textarea>
+                </div>
+
+                <p class="privacy-text">I'll never share your data with anyone else. Pinky promise!</p>
+
+                <button type="submit" class="submit-btn">
+                    Send Message <i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
+
+            <div class="social-footer">
+                <a href="https://github.com/Aafrin-nathissha" target="_blank" class="social-link" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/aafrinnathissha" target="_blank" class="social-link"
+                    title="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="mailto:aafrin2601@gmail.com" class="social-link" title="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            // Construct Gmail compose URL
+            const subject = encodeURIComponent(`Portfolio Inquiry from ${name}`);
+            const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=aafrin2601@gmail.com&su=${subject}&body=${body}`;
+
+            // Open in new tab
+            window.open(gmailUrl, '_blank');
+        });
+    </script>
+</body>
+
+</html>

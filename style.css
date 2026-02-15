@@ -8,10 +8,11 @@ html {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    background-color: #000;
-    /* Fallback for background */
+    background-color: #0E355F;
+    /* Midnight Blue */
     font-family: 'Outfit', sans-serif;
-    /* Closest match to "Youth" style if not available, user can replace */
+    color: #E3EEF6;
+    /* Ice Mist */
 }
 
 .interactive-container {
@@ -19,7 +20,6 @@ html {
     height: 100%;
     position: relative;
     perspective: 1000px;
-    /* Essential for 3D effect */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -37,6 +37,8 @@ html {
     z-index: 0;
     transform: scale(1.1);
     /* Zoom in slightly for parallax movement */
+    filter: brightness(0.8) contrast(1.1);
+    /* Enhance underwater feel */
 }
 
 .content-wrapper {
@@ -46,7 +48,6 @@ html {
     transform: translate(-50%, -50%);
     text-align: center;
     z-index: 1;
-    /* Will be animated by JS */
     opacity: 1;
     transform-style: preserve-3d;
 }
@@ -54,34 +55,26 @@ html {
 .portfolio-text {
     margin: 0;
     padding: 0;
-    color: #FFFFFF;
+    color: #E3EEF6;
+    /* Ice Mist */
     font-family: 'Youth Medium', sans-serif;
-    /* User specified font */
     font-weight: normal;
-    /* Regular */
     opacity: 1;
-    /* Opacity 100% */
     font-size: 14.6rem;
-    /* User requested font size */
     line-height: 0.85;
-    /* Tighter spacing for design */
-    mix-blend-mode: soft-light;
+    mix-blend-mode: normal;
+    /* Removed soft-light for better contrast with new palette */
     display: flex;
     flex-direction: column;
     align-items: center;
     white-space: nowrap;
 }
 
-/* "Youth Medium" is likely a custom font. Ensure it's installed or use a web font. 
-   If user has the font file, they should add @font-face here. */
-
 .line-1,
 .line-2 {
     display: block;
     position: relative;
-    /* For absolute positioning of hover text */
     cursor: default;
-    /* Or pointer if interactive */
 }
 
 .text-original {
@@ -95,68 +88,387 @@ html {
     left: 50%;
     transform: translate(-50%, -50%);
     /* Centered relative to line container */
-    color: #083c55;
+    color: #234C78;
+    /* User requested specific Blue */
+    text-shadow: 0 0 15px rgba(35, 76, 120, 0.6);
     opacity: 1;
-    /* Opacity 1 so mask controls visibility */
     transition: opacity 0.4s ease;
     pointer-events: none;
-    /* Let clicks pass through if needed */
-
-    /* Allow text to be wider than parent and contain descenders */
     width: auto;
     white-space: nowrap;
     padding: 0.2em 0.5em;
-    /* Add framing to avoid clipping descenders like 'g' */
-
     z-index: 2;
-    /* Ensure hover text is on top */
-
-    /* The Spotlight Mask (Soft Flowy Edge) */
-    /* Initally off-screen */
     -webkit-mask-image: radial-gradient(circle 250px at var(--x, -100%) var(--y, -100%), black 25%, transparent 60%);
     mask-image: radial-gradient(circle 250px at var(--x, -100%) var(--y, -100%), black 25%, transparent 60%);
 }
 
-/* Hover effects for the entire text block */
-/* Original text always visible (or faded slightly on hover if desired) */
 .portfolio-text:hover .text-original {
-    opacity: 0.5;
-    /* Fade both original texts to 50% */
+    opacity: 0.3;
 }
 
-/* When hovering the container, expand the spotlight */
-/* Correction: modifying .text-hover to be fixed/relative properly
-   Current .text-hover is inside .line-X. 
-   If .portfolio-text (parent) has the vars, we can use them.
-   But if .text-hover is absolute inside .line-1, and .line-1 is inside .portfolio-text...
-   The coordinate system of clip-path is local to the element (.text-hover).
-   If .text-hover is centered in line, its 0,0 is different from .portfolio-text 0,0.
-   
-   To fix: Ensure --x/--y accounts for offset or make .text-hover cover the entire text block?
-   "Ai" and "Engineer" are small text centered.
-   Maybe apply clip-path to a wrapper?
-   
-   Let's rely on the user's "flow shape" request. 
-   If I hover top left, I want top left of "Ai" to show? 
-   "Ai" is only in the center. So top left is empty.
-   
-   Let's try the simple circle first. If coordinates are off, I will adjust.
-   Note: line-1 is top, line-2 is bottom.
-   If I hover line-1, Y is small.
-   If I hover line-2, Y is large.
-   .text-hover in line-1 needs to use Y relative to line-1?
-   JS calculates Y relative to .portfolio-text.
-   line-1 is top of .portfolio-text. So Y is correct for line-1.
-   line-2 is below line-1. So Y relative to .portfolio-text is (line1_height + local_y).
-   But .text-hover in line-2 is local.
-   So for line-2, the clip-path Y needs to be (var(--y) - line1_height).
-   
-   Hardcoding offset for line 2?
-   Since font-size is HUGE (14.6rem), line-height 0.85...
-   Let's use calc.
-   
-   OR, simpler JS: calculate x/y relative to EACH line?
-   Let's update JS to put vars on the lines? No, single event listener is better.
-   
-   Let's update CSS to offset line-2's mask.
-*/
+/* Hero Buttons */
+.hero-buttons {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    opacity: 0;
+    animation: fadeInButtons 1s ease 0.5s forwards;
+    position: relative;
+    z-index: 10;
+}
+
+@keyframes fadeInButtons {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.resume-btn {
+    background: #E3EEF6;
+    /* Ice Mist */
+    color: #0E355F;
+    /* Midnight Blue */
+    width: 300px;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+    border: none;
+}
+
+.resume-btn:hover {
+    background: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(227, 238, 246, 0.3);
+}
+
+.social-row {
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-family: 'Outfit', sans-serif;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.btn i {
+    margin-right: 8px;
+}
+
+.social-btn i {
+    margin-right: 0;
+    font-size: 1.2rem;
+}
+
+.hire-btn {
+    background: transparent;
+    border: 1px solid #96B9DC;
+    /* Sky Blue */
+    color: #E3EEF6;
+    /* Ice Mist */
+    padding: 12px 30px;
+}
+
+.hire-btn:hover {
+    background: rgba(110, 155, 207, 0.2);
+    /* Cool Blue tint */
+    border-color: #E3EEF6;
+}
+
+.social-btn {
+    background: transparent;
+    border: 1px solid #96B9DC;
+    /* Sky Blue */
+    color: #E3EEF6;
+    padding: 12px 18px;
+}
+
+.social-btn:hover {
+    background: rgba(110, 155, 207, 0.2);
+    border-color: #E3EEF6;
+    transform: translateY(-2px);
+}
+
+/* Navigation */
+.glass-nav {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(14, 53, 95, 0.85);
+    /* Midnight Blue semi-transparent */
+    backdrop-filter: blur(15px);
+    border: 1px solid #4A78B5;
+    /* Blue Fog border */
+    padding: 10px 30px;
+    border-radius: 50px;
+    z-index: 1000;
+}
+
+.glass-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+}
+
+.glass-nav a {
+    color: #C3D9E6;
+    /* Pale Sky */
+    text-decoration: none;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.glass-nav a:hover {
+    color: #E3EEF6;
+    /* Ice Mist */
+    text-shadow: 0 0 10px rgba(227, 238, 246, 0.5);
+}
+
+/* Sections Global */
+.content-section {
+    min-height: 100vh;
+    padding: 100px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+}
+
+.container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.section-title {
+    font-family: 'Youth Medium', sans-serif;
+    font-size: 4rem;
+    color: #E3EEF6;
+    /* Ice Mist */
+    margin-bottom: 50px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+.section-title.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Glass Cards */
+.glass-card {
+    background: rgba(50, 94, 149, 0.2);
+    /* Misty Ridge low opacity */
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(150, 185, 220, 0.3);
+    /* Sky Blue border */
+    padding: 30px;
+    border-radius: 20px;
+    color: #C3D9E6;
+    /* Pale Sky */
+    transition: transform 0.3s ease, background 0.3s ease;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.glass-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.glass-card:hover {
+    background: rgba(74, 120, 181, 0.3);
+    /* Blue Fog */
+    transform: translateY(-5px);
+    border-color: #6E9BCF;
+    /* Cool Blue */
+}
+
+/* Grid Layouts */
+.about-text {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    color: #C3D9E6;
+}
+
+.highlight {
+    color: #96B9DC;
+    /* Sky Blue */
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.skill-category h3 {
+    margin-top: 0;
+    color: #E3EEF6;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(150, 185, 220, 0.2);
+    padding-bottom: 10px;
+}
+
+.custom-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.custom-tags span {
+    background: rgba(30, 73, 122, 0.4);
+    /* Deep Horizon */
+    padding: 5px 15px;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    border: 1px solid #4A78B5;
+    /* Blue Fog */
+    color: #E3EEF6;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+}
+
+.project-role {
+    color: #96B9DC;
+    /* Sky Blue */
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+.tags {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.tags span {
+    font-size: 0.8rem;
+    color: #C3D9E6;
+}
+
+/* Contact */
+.contact-card {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contact-links {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contact-btn {
+    display: inline-block;
+    padding: 15px 30px;
+    background: rgba(74, 120, 181, 0.2);
+    /* Blue Fog */
+    color: #E3EEF6;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.contact-btn:hover {
+    background: #325E95;
+    /* Misty Ridge */
+    border-color: #6E9BCF;
+    transform: scale(1.05);
+}
+
+/* Scroll Arrow */
+.scroll-indicator {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #96B9DC;
+    /* Sky Blue */
+    font-size: 0.9rem;
+    animation: fadeBounce 2s infinite;
+    text-decoration: none;
+    /* Ensure no underline since it's now a link */
+    cursor: pointer;
+}
+
+.arrow {
+    width: 20px;
+    height: 20px;
+    border-right: 2px solid #96B9DC;
+    border-bottom: 2px solid #96B9DC;
+    transform: rotate(45deg);
+    margin-top: 10px;
+}
+
+@keyframes fadeBounce {
+
+    0%,
+    100% {
+        opacity: 0.5;
+        transform: translateX(-50%) translateY(0);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(10px);
+    }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 2.5rem;
+    }
+
+    .glass-nav {
+        bottom: 20px;
+        top: auto;
+        width: 90%;
+        border-radius: 20px;
+        padding: 15px;
+    }
+
+    .glass-nav ul {
+        justify-content: space-between;
+        gap: 0;
+        font-size: 0.8rem;
+    }
+}

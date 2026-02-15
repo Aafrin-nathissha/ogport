@@ -98,4 +98,38 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     animate();
+
+    // =========================================
+    // Scroll Animation Logic (IntersectionObserver)
+    // =========================================
+
+    const observerOptions = {
+        threshold: 0.1, // Trigger when 10% of element is visible
+        rootMargin: "0px 0px -50px 0px"
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                // Optional: Stop observing once visible to run only once
+                // observer.unobserve(entry.target); 
+            }
+        });
+    }, observerOptions);
+
+    // Observe all section titles and glass cards
+    document.querySelectorAll('.section-title, .glass-card').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
 });
